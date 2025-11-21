@@ -7,12 +7,22 @@ metadata = MetaData()
 
 # User table
 
-users = Table(
-  "users",
+# users = Table(
+#   "users",
+#   metadata,
+#   Column("id", Integer, primary_key=True),
+#   Column("name", String(length=50), nullable=False),
+#   Column("email", String, nullable=False, unique=True)
+  
+# )
+
+address = Table(
+  "address",
   metadata,
   Column("id", Integer, primary_key=True),
-  Column("name", String(length=50), nullable=False),
-  Column("email", String, nullable=False, unique=True)
+  Column("street", String(length=50), nullable=False),
+  Column("dist", String, nullable=False, unique=True),
+  Column("country", String, nullable=False, unique=True)
   
 )
 
