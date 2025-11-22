@@ -16,7 +16,10 @@ users = Table(
   
 )
 
+##-------------------------
 # ONE TO MANY Relationship
+##-------------------------
+
 ## User create multiple posts 
 posts = Table(
   "posts",
@@ -30,7 +33,9 @@ posts = Table(
 )
 
 
+##-------------------------
 # ONE TO ONE Relationship
+##-------------------------
 
 profile = Table(
   "profile",
@@ -42,6 +47,26 @@ profile = Table(
   Column("address", String, nullable=False)
 )
 
+
+##--------------------------
+# MANY TO MANY Relationship
+##--------------------------
+
+address = Table(
+  "address",
+  metadata,
+  Column("id", Integer, primary_key=True),
+  Column("street", String, nullable=False),
+  Column("country", String, nullable=False)
+)
+
+user_address_association = Table(
+  "user_address_association",
+  metadata,
+  Column("user_id", Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+  Column("address_id", Integer, ForeignKey("address.id", ondelete="CASCADE"), primary_key=True),
+  
+)
 
 # Create Table in Database
 
