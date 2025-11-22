@@ -1,5 +1,5 @@
 from database import engine
-from sqlalchemy import MetaData, Table, Column, Integer, String
+from sqlalchemy import MetaData, Table, Column, Integer, String, ForeignKey
 
 
 metadata = MetaData()
@@ -7,24 +7,41 @@ metadata = MetaData()
 
 # User table
 
-# users = Table(
-#   "users",
-#   metadata,
-#   Column("id", Integer, primary_key=True),
-#   Column("name", String(length=50), nullable=False),
-#   Column("email", String, nullable=False, unique=True)
-  
-# )
-
-address = Table(
-  "address",
+users = Table(
+  "users",
   metadata,
   Column("id", Integer, primary_key=True),
-  Column("street", String(length=50), nullable=False),
-  Column("dist", String, nullable=False, unique=True),
-  Column("country", String, nullable=False, unique=True)
+  Column("name", String(length=50), nullable=False),
+  Column("email", String, nullable=False, unique=True)
   
 )
+
+# ONE TO MANY Relationship
+## User create multiple posts 
+posts = Table(
+  "posts",
+  metadata,
+  Column("id", Integer, primary_key=True),
+  
+  # User and Post Relationship
+  Column("user_id",Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, unique=True ),
+  Column("title", String, nullable=False),
+  Column("content", String, nullable=False)
+)
+
+
+# ONE TO ONE Relationship
+
+profile = Table(
+  "profile",
+  metadata, 
+  Column("id", Integer, primary_key=True),
+  Column("user_id", Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, unique=True),
+  Column("name", String, nullable=False, unique=True),
+  Column("bio", String, nullable=False),
+  Column("address", String, nullable=False)
+)
+
 
 # Create Table in Database
 
