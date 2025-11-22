@@ -30,6 +30,9 @@ address = Table(
 
 def create_tables():
   metadata.create_all(engine)
-  
+
+
+# Delete Table in Database
+
 # def delete_tables():
 #   metadata.drop_all()
