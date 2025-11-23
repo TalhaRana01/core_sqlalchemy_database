@@ -21,9 +21,22 @@ def create_post(user_id: str, title:str, content: str):
     conn.commit()
     
 
+# Get single user 
 def get_user_by_id(user_id: int):
   with engine.connect() as conn:
     statement = select(users).where(users.c.id == user_id)
     result = conn.execute(statement).first()
     return result
   
+
+def get_all_users():
+  with engine.connect() as conn:
+    statement = select(users)
+    result = conn.execute(statement).fetchall()
+    return result
+  
+def get_post_by_user_id(user_id: int):
+  with engine.connect() as conn:
+    statement = select(posts).where(posts.c.id == user_id)
+    result = conn.execute(statement).first()
+    return result
