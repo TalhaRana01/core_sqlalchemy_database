@@ -19,4 +19,11 @@ def create_post(user_id: str, title:str, content: str):
     statement = insert(posts).values(user_id=user_id, title=title, content=content)
     conn.execute(statement)
     conn.commit()
+    
+
+def get_user_by_id(user_id: int):
+  with engine.connect() as conn:
+    statement = select(users).where(users.c.id == user_id)
+    result = conn.execute(statement).first()
+    return result
   
