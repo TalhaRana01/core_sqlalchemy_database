@@ -28,6 +28,7 @@ posts = Table(
   
   # User and Post Relationship
   Column("user_id",Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, unique=True ),
+  
   Column("title", String, nullable=False),
   Column("content", String, nullable=False)
 )
@@ -41,7 +42,9 @@ profile = Table(
   "profile",
   metadata, 
   Column("id", Integer, primary_key=True),
+  
   Column("user_id", Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, unique=True),
+  
   Column("name", String, nullable=False, unique=True),
   Column("bio", String, nullable=False),
   Column("address", String, nullable=False)
