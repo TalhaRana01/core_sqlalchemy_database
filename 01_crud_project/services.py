@@ -1,6 +1,6 @@
 from database import engine
 from tables import users, posts
-from sqlalchemy import insert, select, update, delete
+from sqlalchemy import insert, select, update, delete, asc, desc
 
 
 
@@ -55,6 +55,14 @@ def delete_user(user_id: int):
     conn.execute(statement)
     conn.commit()
     
+    
+def get_users_by_ordered_by_name():
+  with engine.connect() as conn:
+    statement = select(users).order_by(asc(users.c.name))
+    result = conn.execute(statement).fetchall()
+    return result 
+  
+    
 
 
 # Insert post in table
@@ -69,7 +77,7 @@ def create_post(user_id: str, title:str, content: str):
 def update_post_title(post_id: int, new_title: str):
   with engine.connect() as conn:
     statement = update(posts).where(posts.c.id == post_id).values(title=new_title)
-    conn.execute(statement)
+    conn.execute(statement).fetchall()
     conn.commit()
 
 
@@ -79,3 +87,9 @@ def delete_post(post_id:int):
     statement = delete(posts).where(posts.c.id == post_id)
     conn.execute(statement)
     conn.commit()
+
+def get_posts_latest_first():
+  with engine.connect() as conn:
+    statement = select(posts).order_by(desc(posts.c.id))
+    result = conn.execute(statement).fetchall()
+    return result

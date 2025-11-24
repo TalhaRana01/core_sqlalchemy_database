@@ -1,5 +1,5 @@
 from tables import create_table
-from services import create_user, create_post, get_user_by_id, get_all_users, get_post_by_user_id, update_user_email, update_post_title, delete_user, delete_post
+from services import create_user, create_post, get_user_by_id, get_all_users, get_post_by_user_id, update_user_email, update_post_title, delete_user, delete_post, get_users_by_ordered_by_name, get_posts_latest_first
 
 
 # Create tables 
@@ -17,6 +17,10 @@ from services import create_user, create_post, get_user_by_id, get_all_users, ge
 
 # delete_user(2)
 
+# print(get_users_by_ordered_by_name())
+
+
+
 
 # Post
 # create_post(1, "How AI Effect on Online fields", "5 effected fields by AI ")
@@ -25,6 +29,8 @@ from services import create_user, create_post, get_user_by_id, get_all_users, ge
 # print(get_post_by_user_id(2))
 
 # update_post_title(1,"first post title")
-delete_post(2)
+# delete_post(2)
+
+print(get_posts_latest_first())
 
 
